@@ -39,13 +39,22 @@ else()
     message("Doxygen required to build Doxygen Documentation")
 endif()
 
+add_subdirectory(vendor/FlockFlow)
+
 add_library(${PROJECT_NAME}
     source/Testable.cpp
     source/TestCollection.cpp
     source/PidgeonPulse.cpp
 )
 target_include_directories(${PROJECT_NAME}
-    PUBLIC include
+    PUBLIC
+        include
+    PRIVATE
+        ${FLOCKFLOW_INCLUDE_DIR}
+)
+
+target_link_libraries(${PROJECT_NAME}
+    PRIVATE FlockFlow
 )
 
 if(GCOV AND LCOV AND GENHTML)

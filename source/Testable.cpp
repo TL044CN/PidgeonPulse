@@ -2,6 +2,9 @@
 
 namespace PidgeonPulse {
 
+Testable::Testable(std::string name)
+: mTestName(name), mState(STATE::NOT_RUN) {}
+
 void Testable::setup(){}
 void Testable::teardown(){}
 
@@ -58,9 +61,18 @@ bool Testable::get_result() const {
     return mState == STATE::PASSED;
 }
 
+bool Testable::threw_exception() const {
+    return static_cast<bool>(mState & STATE::EXCEPTION_BIT);
+}
+
+std::vector<Testable::FailInfo> Testable::get_fail_infos() const {
+    return mFailInfos;
+}
+
 void Testable::operator()() {
     setup();
     mState = STATE::IN_PROGRESS;
+
     mStartTime = std::chrono::high_resolution_clock::now();
     try {
         run();
@@ -81,6 +93,10 @@ Testable::STATE operator&(Testable::STATE a, Testable::STATE b) {
 
 Testable::STATE operator|(Testable::STATE a, Testable::STATE b) {
     return static_cast<Testable::STATE>(static_cast<uint8_t>(a) | static_cast<uint8_t>(b));
+}
+
+std::string Testable::get_name() const {
+    return mTestName;
 }
 
 }

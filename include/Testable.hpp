@@ -290,7 +290,7 @@ public:
      *
      * This is the default constructor for the Test class.
      */
-    Testable();
+    Testable(std::string name);
 
     /**
      * @brief Destroy the Test object.
@@ -347,6 +347,28 @@ public:
      * @return false the test failed.
      */
     bool get_result() const;
+
+    /**
+     * @brief Check if the test threw an exception.
+     *
+     * @return true the test threw an exception.
+     * @return false the test did not throw an exception.
+     */
+    bool threw_exception() const;
+
+    /**
+     * @brief Get all the fail infos.
+     * 
+     * @return std::vector<FailInfo> the fail infos.
+     */
+    std::vector<FailInfo> get_fail_infos() const;
+
+    /**
+     * @brief Get the name of the test.
+     *
+     * @return std::string the name of the test.
+     */
+    std::string get_name() const;
 
     /**
      * @brief Run the test.
