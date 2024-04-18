@@ -14,15 +14,33 @@
 
 namespace PidgeonPulse {
     class TestController : Singleton<TestController> {
+    private:
+        std::vector<TestCollection*> mTestCollections;
+
     public:
         TestController() = default;
         ~TestController() = default;
+
+        /**
+         * @brief Add a TestCollection to the TestController
+         * 
+         * @param name the name of the TestCollection
+         */
+        static void addTestCollection(std::string name);
 
         /**
          * @brief Add a Test to the TestController
          * 
          * Runs the Tests
          */
-        void runTests();
+        static void runTests();
+
+        /**
+         * @brief Generate a report of the tests
+         * 
+         * @return std::string the report
+         */
+        static std::string generateReport();
+
     };
 } // namespace PidgeonPulse
