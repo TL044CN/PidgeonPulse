@@ -39,13 +39,25 @@ else()
     message("Doxygen required to build Doxygen Documentation")
 endif()
 
+add_subdirectory(vendor/FlockFlow)
+
 add_library(${PROJECT_NAME}
-    source/Test.cpp
-#    source/Event.cpp
+    source/Testable.cpp
+    source/TestCollection.cpp
+    source/TestController.cpp
+    source/PidgeonPulse.cpp
 )
 target_include_directories(${PROJECT_NAME}
-    PUBLIC include
+    PUBLIC
+        include
+    PRIVATE
+        ${FLOCKFLOW_INCLUDE_DIR}
 )
+
+target_link_libraries(${PROJECT_NAME}
+    PRIVATE FlockFlow
+)
+
 if(GCOV AND LCOV AND GENHTML)
     if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
         target_compile_options(${PROJECT_NAME} PRIVATE -fprofile-arcs -ftest-coverage)

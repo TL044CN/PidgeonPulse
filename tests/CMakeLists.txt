@@ -3,19 +3,24 @@ include(FetchContent)
 FetchContent_Declare(
   Catch2
   GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-  GIT_TAG        v2.x
+  GIT_TAG        v2.13.7
 )
 
 FetchContent_GetProperties(Catch2)
 if(NOT catch2_POPULATED)
   FetchContent_Populate(Catch2)
+  message("Catch2 source dir: ${catch2_SOURCE_DIR}/single_include")
+  message("Catch2 binary dir: ${catch2_BINARY_DIR}")
   add_subdirectory(${catch2_SOURCE_DIR} ${catch2_BINARY_DIR})
 endif()
 
 # Add your tests
 add_executable(${PROJECT_NAME}_tests
   test_main.cpp
+  test_pidgeon_pulse.cpp
 )
+
+add_dependencies(${PROJECT_NAME}_tests ${PROJECT_NAME} Catch2::Catch2)
 
 target_link_libraries(${PROJECT_NAME}_tests
     PRIVATE
@@ -23,11 +28,14 @@ target_link_libraries(${PROJECT_NAME}_tests
         ${PROJECT_NAME}
 )
 
+message("Include dir: ${${PROJECT_NAME}_INCLUDE_DIR}")
+
 target_include_directories(${PROJECT_NAME}_tests
     PRIVATE
         ${catch2_SOURCE_DIR}/single_include
         ${${PROJECT_NAME}_INCLUDE_DIR}
 )
+
 
 set_target_properties(${PROJECT_NAME}_tests PROPERTIES
     TEST_PREFIX "test_"
