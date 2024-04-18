@@ -44,6 +44,7 @@ add_subdirectory(vendor/FlockFlow)
 add_library(${PROJECT_NAME}
     source/Testable.cpp
     source/TestCollection.cpp
+    source/TestController.cpp
     source/PidgeonPulse.cpp
 )
 target_include_directories(${PROJECT_NAME}

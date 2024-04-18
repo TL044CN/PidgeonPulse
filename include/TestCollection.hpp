@@ -72,6 +72,13 @@ public:
      */
     std::string generateReport();
 
+    /**
+     * @brief Get the name of the collection
+     * 
+     * @return std::string the name
+     */
+    inline std::string getName() const { return mTestCollectionName; }
+
 };
 
 } // namespace PidgeonPulse

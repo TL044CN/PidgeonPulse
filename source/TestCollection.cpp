@@ -1,9 +1,10 @@
 #include "TestCollection.hpp"
-
+#include "TestController.hpp"
 namespace PidgeonPulse {
 
 TestCollection::TestCollection(std::string name): mTestCollectionName(name) {
     mThreadPool.pause();
+    TestController::getInstance().mTestCollections.push_back(this);
 }
 
 TestCollection::~TestCollection() {

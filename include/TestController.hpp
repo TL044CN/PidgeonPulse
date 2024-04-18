@@ -13,9 +13,17 @@
 #include "TestCollection.hpp"
 
 namespace PidgeonPulse {
+
+    /**
+     * @brief The main Controller of the Test System
+     * 
+     * Manages the TestCollections, generates reports, and runs the tests
+     */
     class TestController : Singleton<TestController> {
     private:
         std::vector<TestCollection*> mTestCollections;
+
+        friend TestCollection;
 
     public:
         TestController() = default;
@@ -26,7 +34,7 @@ namespace PidgeonPulse {
          * 
          * @param name the name of the TestCollection
          */
-        static void addTestCollection(std::string name);
+        static TestCollection& addTestCollection(std::string name);
 
         /**
          * @brief Add a Test to the TestController
@@ -41,6 +49,14 @@ namespace PidgeonPulse {
          * @return std::string the report
          */
         static std::string generateReport();
+
+        /**
+         * @brief Get a TestCollection by name
+         * 
+         * @param name the name of the TestCollection
+         * @return TestCollection& the TestCollection
+         */
+        static TestCollection& getTestCollection(const std::string& name);
 
     };
 } // namespace PidgeonPulse
