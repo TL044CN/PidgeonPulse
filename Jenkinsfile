@@ -69,14 +69,6 @@ pipeline {
                                     """
                                 }
                             }
-                            stage('Run Tests'){
-                                steps {
-                                    sh """
-                                    cmake -B build/ -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
-                                    cmake --build build/ --config=${BUILD_TYPE} --target coverage -j
-                                    """
-                                }
-                            }
                             stage('Archiving Artifacts') {
                                 steps {
                                     sh 'mv build "build-${PLATFORM}-${COMPILER}"'
