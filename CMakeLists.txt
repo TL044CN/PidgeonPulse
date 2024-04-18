@@ -40,12 +40,14 @@ else()
 endif()
 
 add_library(${PROJECT_NAME}
-    source/Test.cpp
-#    source/Event.cpp
+    source/Testable.cpp
+    source/TestCollection.cpp
+    source/PidgeonPulse.cpp
 )
 target_include_directories(${PROJECT_NAME}
     PUBLIC include
 )
+
 if(GCOV AND LCOV AND GENHTML)
     if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
         target_compile_options(${PROJECT_NAME} PRIVATE -fprofile-arcs -ftest-coverage)
