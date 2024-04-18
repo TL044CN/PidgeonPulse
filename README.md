@@ -1,5 +1,5 @@
-[![Build Status](https://jenkins.shodan.fyi/buildStatus/icon?job=ttUT4)](https://jenkins.shodan.fyi/job/ttUT4/)
-# Unit Test System
+[![Build Status](https://jenkins.shodan.fyi/buildStatus/icon?job=PidgeonPulse)](https://jenkins.shodan.fyi/job/PidgeonPulse/)
+# Pidgeon Pulse
 A Simple UnitTesting Framework written in C++ for C++
 
 # Example Usage:
