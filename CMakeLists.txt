@@ -94,8 +94,6 @@ else()
     add_library(${PROJECT_NAME} STATIC ${${PROJECT_NAME}_SOURCES})
 endif()
 
-#find_package(FlockFlow REQUIRED)
-
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
         FlockFlow
