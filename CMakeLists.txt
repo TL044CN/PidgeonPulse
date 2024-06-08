@@ -83,8 +83,11 @@ else()
     add_library(${PROJECT_NAME} STATIC ${${PROJECT_NAME}_SOURCES})
 endif()
 
+#find_package(FlockFlow REQUIRED)
+
 target_link_libraries(${PROJECT_NAME}
-    PRIVATE FlockFlow
+    PUBLIC
+        FlockFlow
 )
 
 target_include_directories(${PROJECT_NAME}
@@ -108,17 +111,16 @@ install(TARGETS ${PROJECT_NAME}
     PUBLIC_HEADER DESTINATION include
 )
 
-install(
-    DIRECTORY include/
-    DESTINATION include
-)
-
 install(EXPORT ${PROJECT_NAME}Targets
     FILE ${PROJECT_NAME}Targets.cmake
     NAMESPACE ${PROJECT_NAME}::
     DESTINATION lib/cmake/${PROJECT_NAME}
 )
 
+install(
+    DIRECTORY include/
+    DESTINATION include
+)
 
 if(GCOV AND LCOV AND GENHTML)
     if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
