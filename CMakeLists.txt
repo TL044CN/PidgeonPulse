@@ -75,7 +75,18 @@ set(${PROJECT_NAME}_SOURCES
     include/PidgeonPulse.hpp
 )
 
-add_subdirectory(vendor/FlockFlow)
+include(FetchContent)
+FetchContent_Declare(
+  FlockFlow
+  GIT_REPOSITORY https://github.com/TL044CN/FlockFlow.git
+  GIT_TAG        1.0.2
+)
+
+FetchContent_GetProperties(FlockFlow)
+if(NOT flockflow_POPULATED)
+  FetchContent_Populate(FlockFlow)
+  add_subdirectory(${flockflow_SOURCE_DIR} ${flockflow_BINARY_DIR})
+endif()
 
 if(${PROJECT_NAME}_BUILD_SHARED)
     add_library(${PROJECT_NAME} SHARED ${${PROJECT_NAME}_SOURCES})
