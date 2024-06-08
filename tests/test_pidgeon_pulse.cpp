@@ -2,6 +2,9 @@
 #include "PidgeonPulse.hpp"
 
 TEST_CASE("Test PidgeonPulse", "[PidgeonPulse]") {
+
+
+
     SECTION("Test PidgeonPulse") {
         REQUIRE(true);
     }

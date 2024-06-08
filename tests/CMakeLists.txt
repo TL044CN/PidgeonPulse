@@ -18,6 +18,7 @@ endif()
 add_executable(${PROJECT_NAME}_tests
   test_main.cpp
   test_pidgeon_pulse.cpp
+  test_TestController.cpp
 )
 
 add_dependencies(${PROJECT_NAME}_tests ${PROJECT_NAME} Catch2::Catch2)
@@ -63,6 +64,7 @@ if(GCOV AND LCOV AND GENHTML)
       COMMAND ${CMAKE_MAKE_PROGRAM} test
       COMMAND ${GCOV} -r -pb tests/CMakeFiles/${PROJECT_NAME}_tests.dir/*.gcno CMakeFiles/${PROJECT_NAME}.dir/source/*.gcno
       COMMAND ${LCOV} --capture --directory . --output-file coverage.info
+      COMMAND ${LCOV} --remove coverage.info '/usr/*' '*/vendor/*' '*/_deps/*' --output-file coverage.info
       COMMAND ${GENHTML} coverage.info --output-directory out
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
       COMMENT "Running GCOV and generating report"
